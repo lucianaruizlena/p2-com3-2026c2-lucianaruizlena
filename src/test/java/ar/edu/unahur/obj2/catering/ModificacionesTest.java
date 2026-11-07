@@ -13,14 +13,23 @@ public class ModificacionesTest {
 
     @Test
     public void dadoUnServicio_alAplicarUnaActualizacion_dejaElNuevoPrecio() {
-        // Arrange
-        Servicio servicio = new Servicio("Parrillada completa", 240000.0);
-        Modificacion modificacion = new ActualizarPrecioDeServicio(servicio, 260000.0);
+        Servicio servicio = new Servicio("Parrilla completa", 150000.0);
+        Modificacion modificacion = new ActualizarPrecioDeServicio(servicio, 16000.0);
 
-        // Act
         modificacion.aplicar();
 
-        // Assert
-        assertEquals(260000.0, servicio.precio());
+        assertEquals(16000.0, servicio.precio());
+    }
+
+
+    @Test
+    public void dadaUnaActualizacionAplicada_alDeshacerla_recuperaElPrecioAnterior() {
+        Servicio servicio = new Servicio("Parrilla completa", 150000.0);
+        Modificacion modificacion = new ActualizarPrecioDeServicio(servicio, 160000.0);
+        modificacion.aplicar();
+
+        modificacion.deshacer();
+
+        assertEquals(150000.0, servicio.precio());
     }
 }
