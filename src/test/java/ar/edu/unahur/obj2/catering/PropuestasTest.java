@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unahur.obj2.catering.excepciones.DescuentoEsInvalidoException;
 import ar.edu.unahur.obj2.catering.propuestas.Menu;
 import ar.edu.unahur.obj2.catering.propuestas.Servicio;
 
@@ -21,6 +22,13 @@ public class PropuestasTest {
 
         assertEquals(126000.0, precio);
 
+    }
+
+    @Test
+    public void dadoUnMenuConDescuentoFueraDeRango_alCrearlo_lanzaDescuentoInvalidoException() {
+        Double descuentoInvalido = 101.0;
+
+        assertThrows(DescuentoEsInvalidoException.class, () -> new Menu("Inválido", descuentoInvalido));
     }
 
     @Test
